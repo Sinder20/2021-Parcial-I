@@ -1,0 +1,30 @@
+{% extends 'index.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+    {% if form.errors %}
+        <div class="alert alert-danger" role="alert">
+          A simple danger alert—check it out!
+        </div>
+    {% endif %}
+
+    <h1>Actualizacion de Categorias</h1>
+    <div class="row col-12 justify-content-end mb-2 pr-0">
+        <a class="btn btn-success col-md-2.5" href="{% url 'listarCategoria' %}">Ver Registrados</a>
+    </div>
+    <form action="{% url 'actualizarCategoria' categoria.id %}" method="post">
+
+        {% csrf_token %}
+        {% if mensaje %}
+            <div class="alert alert-success" role="alert">
+              Categoria Actualizada Exitósamente!
+            </div>
+        {% endif %}
+
+        {{ form|crispy }}
+
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-info" href="{% url 'listarCategoria' %}">Cancelar</a>
+    </form>
+
+{% endblock %}
